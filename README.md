@@ -318,6 +318,7 @@ systemctl enable openstack-nova-api openstack-nova-conductor openstack-nova-cons
 
 #### Configurando Nova na Controller
 /etc/nova/nova.conf:
+```
 [DEFAULT]
 enabled_apis=osapi_compute,metadata
 transport_url=rabbit://openstack:qwe123qwe@controller
@@ -380,9 +381,11 @@ discover_hosts_in_cells_interval=300
 enabled = true
 server_listen = $my_ip
 server_proxyclient_address = $my_ip
+```
 
 ### Liberar acesso na API do Placement(bug):
 Edite o arquivo /etc/httpd/conf.d/00-nova-placement-api.conf:
+```
 <Directory /usr/bin>
    <IfVersion >= 2.4>
       Require all granted
@@ -392,13 +395,14 @@ Edite o arquivo /etc/httpd/conf.d/00-nova-placement-api.conf:
       Allow from all
    </IfVersion>
 </Directory>
+```
 
 ***Não esquecer de reiniciar o HTTPd:***
 ```SH
 systemctl restart httpd
 ```
 
-
+# Compute Node
 ## Instalando Nova na Compute01
 
 #### Instalando pacote nova-compute
@@ -407,6 +411,7 @@ yum install openstack-nova-compute
 ```
 #### Configurando Nova na Compute
 /etc/nova/nova.conf:
+```
 [DEFAULT]
 user_neutron = true
 firewall_driver = nova.virt.firewall.NoopFirewallDriver
@@ -460,11 +465,21 @@ enabled = true
 server_listen = 0.0.0.0
 server_proxyclient_address = $my_ip
 novncproxy_base_url = http://controller:6080/vnc_auto.html
+```
 
-
-
-
-
-
+### Garantindo serviços do Libvirt ativos: 
+```SH
+# systemctl enable libvirtd.service openstack-nova-compute.service
+# systemctl start libvirtd.service openstack-nova-compute.service
+```
+## ======= ***REALIZAR OS COMANDOS QUE SEGUEM NA CONTROLLER*** ======= 
+### Confirmando Compute Node no database da Controller:
+```SH
+# openstack compute service list --service nova-compute
+```
+### Realizando discover na Controller:
+```SH
+# su -s /bin/sh -c "nova-manage cell_v2 discover_hosts --verbose" nova
+```
 
 
