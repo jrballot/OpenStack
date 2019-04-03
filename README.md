@@ -16,12 +16,15 @@ Passos para aula de OpenStack
 ```
 
 Edite o arquivo /etc/my.cnf com conteúdo que segue abaixo da entrda [mysqld]:
+```
 bind-address = 10.0.10.11
 default-storage-engine = innodb
 innodb_file_per_table = on
 max_connections = 4096
 collation-server = utf8_general_ci
 character-set-server = utf8
+```
+Posteriomente execute os comandos:
 
 ```sh
 # systemctl enable mariadb.service
