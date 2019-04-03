@@ -232,12 +232,28 @@ flavor = keystone
 ```
 
 ### Baixando e Criando Imagens para o OpenStack
+Baixando imagem do CirrOS:
 ```SH
 # curl -O ht://download.cirros-cloud.net/0.3.5/cirros-0.3.5-x86_64-disk.img
 # openstack image create "Cirros 0.3.5" --file cirros-0.3.5-x86_64-disk.img --disk-format qcow2 --container-format bare --publico
-
+```
+**(NÃO RODAR ESSE COMANDO)** Baixando imagem do Ubuntu Trusty 14.04 LTS:
+```SH
 curl -O https://cloud-images.ubuntu.com/trusty/current/trusty-server-cloudimg-amd64-disk1.img
 openstack image create "Ubuntu Trusty 14.04" --file trusty-server-cloudimg-amd64-disk1.img --disk-format qcow2 --container-format bare --public
+```
+
+**(NÃO RODAR ESSE COMANDO)** Baixando image do Ubuntu Bionic 18.04 LTS:
+```SH
+curl -O http://cloud-images.ubuntu.com/minimal/releases/bionic/release/ubuntu-18.04-minimal-cloudimg-amd64.img
+openstack image create "Ubuntu Bionic 18.04 LTS" --file ubuntu-18.04-minimal-cloudimg-amd64.img -disk-format qcow2 --container-format bare --public
+```
+
+### Garantindo serviços na inicialização
+
+```SH
+systemctl enable openstack-glance-api.service openstack-glance-registry.service
+systemctl start openstack-glance-api.service openstack-glance-registry.service
 ```
 
 ## Instalando Nova no Controller
@@ -264,43 +280,43 @@ MariaDB [(none)]> GRANT ALL PRIVILEGES ON placement.* TO 'placement'@'localhost'
 MariaDB [(none)]> GRANT ALL PRIVILEGES ON placement.* TO 'placement'@'%' IDENTIFIED BY 'PLACEMENT_DBPASS';
 ```
 
-Criando usuário Nova:
+### Criando usuário Nova:
 ```SH
 openstack user create --domain default --password-prompt nova
 openstack role add --project service --user nova admin
 openstack service create --name nova --description "OpenStack Compute" compute
 ```
 
-Criando Endpoints do serviço Compute:
+### Criando Endpoints do serviço Compute:
 ```SH
 openstack endpoint create --region RegionOne compute public http://controller:8774/v2.1
 openstack endpoint create --region RegionOne compute internal http://controller:8774/v2.1
 openstack endpoint create --region RegionOne compute admin http://controller:8774/v2.1
 ```
-Criando usuário Placement:
+### Criando usuário Placement:
 ```SH
 openstack user create --domain default --password-prompt placement
 openstack role add --project service --user placement admin
 openstack service create --name placement --description "Placement API" placement
 ```
-Criando Endpoints para Placement:
+### Criando Endpoints para Placement:
 ```SH
 openstack endpoint create --region RegionOne placement public http://controller:8778
 openstack endpoint create --region RegionOne placement internal http://controller:8778
 openstack endpoint create --region RegionOne placement admin http://controller:8778
 ```
 
-Instalando Nova
+### Instalando Nova
 ```SH
 yum install openstack-nova-api openstack-nova-conductor openstack-nova-console openstack-nova-novncproxy  openstack-nova-scheduler openstack-nova-placement-api
 ```
 
-Garantir serviços subindo no boot:
+### Garantir serviços subindo no boot:
 ```SH
 systemctl enable openstack-nova-api openstack-nova-conductor openstack-nova-console openstack-nova-novncproxy  openstack-nova-scheduler openstack-nova-placement-api
 ```
 
-#### Configurando Nova
+#### Configurando Nova na Controller
 /etc/nova/nova.conf:
 [DEFAULT]
 enabled_apis=osapi_compute,metadata
@@ -365,7 +381,7 @@ enabled = true
 server_listen = $my_ip
 server_proxyclient_address = $my_ip
 
-Liberar acesso na API do Placement(bug):
+### Liberar acesso na API do Placement(bug):
 Edite o arquivo /etc/httpd/conf.d/00-nova-placement-api.conf:
 <Directory /usr/bin>
    <IfVersion >= 2.4>
@@ -377,12 +393,78 @@ Edite o arquivo /etc/httpd/conf.d/00-nova-placement-api.conf:
    </IfVersion>
 </Directory>
 
-Não esquecer de reiniciar o HTTPd:
+***Não esquecer de reiniciar o HTTPd:***
 ```SH
 systemctl restart httpd
 ```
 
 
-#### Instalando Nova na Compute01
+## Instalando Nova na Compute01
+
+#### Instalando pacote nova-compute
+```SH
 yum install openstack-nova-compute
+```
+#### Configurando Nova na Compute
+/etc/nova/nova.conf:
+[DEFAULT]
+user_neutron = true
+firewall_driver = nova.virt.firewall.NoopFirewallDriver
+my_ip = 10.0.10.21
+enabled_apis = osapi_compute,metadata
+transport_url = rabbit://openstack:qwe123qwe@controller
+debug=true
+
+[glance]
+api_servers = http://controller:9292
+
+[keystone_authtoken]
+auth_url = http://controller:5000/v3
+memcached_servers = controller:11211
+auth_type = password
+project_domain_name = default
+user_domain_name = default
+project_name = service
+username = nova
+password = qwe123qwe
+
+[libvirt]
+virt_type=qemu
+
+[neutron]
+url = http://controller:9696
+auth_url = http://controller:5000
+auth_type = password
+project_domain_name = default
+user_domain_name = default
+region_name = RegionOne
+project_name = service
+username = neutron
+password = qwe123qwe
+
+[oslo_concurrency]
+lock_path = /var/lib/nova/tmp
+
+[placement]
+region_name = RegionOne
+project_domain_name = Default
+project_name = service
+auth_type = password
+user_domain_name = Default
+auth_url = http://controller:5000/v3
+username = placement
+password = qwe123qwe
+
+[vnc]
+enabled = true
+server_listen = 0.0.0.0
+server_proxyclient_address = $my_ip
+novncproxy_base_url = http://controller:6080/vnc_auto.html
+
+
+
+
+
+
+
 
