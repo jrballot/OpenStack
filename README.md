@@ -145,12 +145,40 @@ openstack --os-auth-url http://controller:5000/v3 --os-project-domain-name Defau
 $ openstack --os-auth-url http://controller:5000/v3 --os-project-domain-name Default --os-user-domain-name Default --os-project-name myproject --os-username myuser token issue
 ```
 
-### Instalando Glance no Controller
+## Instalando Glance no Controller
+
+### Instalando o Glance:
+```SH
+# yum install -y openstack-glance
+```
+
+### Criando Base de dados e Privilégios para Glance
+```SH
+# mysql -u root -p
+MariaDB [(none)]> CREATE DATABASE glance;
+MariaDB [(none)]> GRANT ALL PRIVILEGES ON glance.* TO 'glance'@'localhost' IDENTIFIED BY 'qwe123qwe';
+MariaDB [(none)]> GRANT ALL PRIVILEGES ON glance.* TO 'glance'@'%' IDENTIFIED BY 'qwe123qwe';
+```
+
+### Criando usuário e serviço para o Glance
+```SH
+source admin-rc
+openstack user create --domain default --password-prompt glance
+openstack role add --project service --user glance admin
+openstack service create --name glance --description "OpenStack Image" image
+```
+### Criando Endpoints para o Glance
+```SH
+openstack endpoint create --region RegionOne image public http://controller:9292
+openstack endpoint create --region RegionOne image internal http://controller:9292
+openstack endpoint create --region RegionOne image admin http://controller:9292
+```
+### Arquivos de configuração do Glance:
 
 /etc/glance/glance-api.conf:
 ```
-[dataabase]
-connection = mysql+pymysql://glance:GLANCE_DBPASS@controller/glance
+[database]
+connection = mysql+pymysql://glance:qwe123qwe@controller/glance
 
 [keystone_authtoken]
 www_authenticate_uri  = http://controller:5000
@@ -161,10 +189,10 @@ project_domain_name = Default
 user_domain_name = Default
 project_name = service
 username = glance
-password = GLANCE_PASS
+password = qwe123qwe
 
 [paste_deploy]
-falvor = keystone
+flavor = keystone
 
 [glance_store]
 stores = file,http
@@ -192,18 +220,18 @@ password = GLANCE_PASS
 flavor = keystone
 ```
 
-Para popular o banco do Glance:
+### Populando o banco do Glance:
 ```SH
 # su -s /bin/sh -c "glance-manage db_sync" glance
 ```
 
-Garantir serviço ativo e rodando:
+### Garantir serviço ativo e rodando:
 ```SH
 # systemctl enable openstack-glance-api.service openstack-glance-registry.service
 # systemctl start openstack-glance-api.service openstack-glance-registry.service
 ```
 
-Baixando e Criando Imagens para o OpenStack
+### Baixando e Criando Imagens para o OpenStack
 ```SH
 # curl -O ht://download.cirros-cloud.net/0.3.5/cirros-0.3.5-x86_64-disk.img
 # openstack image create "Cirros 0.3.5" --file cirros-0.3.5-x86_64-disk.img --disk-format qcow2 --container-format bare --publico
@@ -212,7 +240,7 @@ curl -O https://cloud-images.ubuntu.com/trusty/current/trusty-server-cloudimg-am
 openstack image create "Ubuntu Trusty 14.04" --file trusty-server-cloudimg-amd64-disk1.img --disk-format qcow2 --container-format bare --public
 ```
 
-### Instalando Nova no Controller
+## Instalando Nova no Controller
 #### Criar a base de dados
 ```SH
 CREATE DATABASE nova_api;
