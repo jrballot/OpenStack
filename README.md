@@ -4,7 +4,6 @@ Passos para aula de OpenStack
 # TODAS AS MAQUINAS
 ```sh
 # yum install centos-release-openstack-rocky
-# yum upgrade
 # yum install python-openstackclient
 # yum install openstack-selinux
 ```
