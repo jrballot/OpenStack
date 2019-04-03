@@ -472,7 +472,7 @@ novncproxy_base_url = http://controller:6080/vnc_auto.html
 # systemctl enable libvirtd.service openstack-nova-compute.service
 # systemctl start libvirtd.service openstack-nova-compute.service
 ```
-## ======= ***REALIZAR OS COMANDOS QUE SEGUEM NA CONTROLLER*** ======= 
+### ======= ***REALIZAR OS COMANDOS QUE SEGUEM NA CONTROLLER*** ======= 
 ### Confirmando Compute Node no database da Controller:
 ```SH
 # openstack compute service list --service nova-compute
