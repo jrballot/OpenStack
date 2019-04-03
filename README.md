@@ -402,6 +402,30 @@ Edite o arquivo /etc/httpd/conf.d/00-nova-placement-api.conf:
 systemctl restart httpd
 ```
 
+### Populando base de dados do Nova-API e Placement
+```SH
+# su -s /bin/sh -c "nova-manage api_db sync" nova
+# su -s /bin/sh -c "nova-manage cell_v2 map_cell0" nova
+# su -s /bin/sh -c "nova-manage cell_v2 create_cell --name=cell1 --verbose" nova
+# su -s /bin/sh -c "nova-manage db sync" nova
+```
+
+Validando configuração:
+```SH
+# su -s /bin/sh -c "nova-manage cell_v2 list_cells" nova
+```
+
+### Finalizando instanalação no Controller Node
+
+```SH
+# systemctl enable openstack-nova-api.service \
+  openstack-nova-consoleauth openstack-nova-scheduler.service \
+  openstack-nova-conductor.service openstack-nova-novncproxy.service
+# systemctl start openstack-nova-api.service \
+  openstack-nova-consoleauth openstack-nova-scheduler.service \
+  openstack-nova-conductor.service openstack-nova-novncproxy.service
+```
+
 # Compute Node
 ## Instalando Nova na Compute01
 
