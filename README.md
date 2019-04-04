@@ -295,12 +295,14 @@ openstack endpoint create --region RegionOne compute public http://controller:87
 openstack endpoint create --region RegionOne compute internal http://controller:8774/v2.1
 openstack endpoint create --region RegionOne compute admin http://controller:8774/v2.1
 ```
+
 ### Criando usuário Placement:
 ```SH
 openstack user create --domain default --password-prompt placement
 openstack role add --project service --user placement admin
 openstack service create --name placement --description "Placement API" placement
 ```
+
 ### Criando Endpoints para Placement:
 ```SH
 openstack endpoint create --region RegionOne placement public http://controller:8778
@@ -498,15 +500,7 @@ novncproxy_base_url = http://controller:6080/vnc_auto.html
 # systemctl enable libvirtd.service openstack-nova-compute.service
 # systemctl start libvirtd.service openstack-nova-compute.service
 ```
-### ======= ***REALIZAR OS COMANDOS QUE SEGUEM NA CONTROLLER*** ======= 
-### Confirmando Compute Node no database da Controller:
-```SH
-# openstack compute service list --service nova-compute
-```
-### Realizando discover na Controller:
-```SH
-# su -s /bin/sh -c "nova-manage cell_v2 discover_hosts --verbose" nova
-```
+
 
 ## Instalando Neutron no Controller Node
 ### Criando Banco e Privilégios
@@ -724,4 +718,13 @@ sysctl -w net.bridge.bridge-nf-call-ip6tables=1
 # systemctl restart openstack-nova-compute.service
 ```
 
+### ======= ***REALIZAR OS COMANDOS QUE SEGUEM NA CONTROLLER*** ======= 
+### Confirmando Compute Node no database da Controller:
+```SH
+# openstack compute service list --service nova-compute
+```
+### Realizando discover na Controller:
+```SH
+# su -s /bin/sh -c "nova-manage cell_v2 discover_hosts --verbose" nova
+```
 
