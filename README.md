@@ -428,7 +428,7 @@ Validando configuração:
   openstack-nova-conductor.service openstack-nova-novncproxy.service
 ```
 
-# Compute Node
+## Compute Node
 ## Instalando Nova na Compute01
 
 #### Instalando pacote nova-compute
@@ -508,4 +508,70 @@ novncproxy_base_url = http://controller:6080/vnc_auto.html
 # su -s /bin/sh -c "nova-manage cell_v2 discover_hosts --verbose" nova
 ```
 
+## Instalando Neutron no Controller Node
+### Criando Banco e Privilégios
 
+```SH
+
+MariaDB [(none)] CREATE DATABASE neutron;
+MariaDB [(none)]> GRANT ALL PRIVILEGES ON neutron.* TO 'neutron'@'localhost' IDENTIFIED BY 'NEUTRON_DBPASS';
+MariaDB [(none)]> GRANT ALL PRIVILEGES ON neutron.* TO 'neutron'@'%' IDENTIFIED BY 'NEUTRON_DBPASS';
+```
+
+### Adicionando usuário Neutron ao projeto Service
+```SH
+source admin-rc
+{admin}# openstack user create --domain default --password-prompt neutron
+{admin}# openstack role add --project service --user neutron admin
+{admin}# openstack service create --name neutron --description "OpenStack Networking" network
+{admin}# openstack endpoint create --region RegionOne network public http://controller:9696
+{admin}# openstack endpoint create --region RegionOne network internal http://controller:9696
+{admin}# openstack endpoint create --region RegionOne network admin http://controller:9696
+```
+
+## Configurando Self-Service Network
+### Instalando Neutron
+```SH
+# yum install -y openstack-neutron openstack-neutron-ml2 openstack-neutron-linuxbridge ebtables
+```
+
+### Configurando Neutron
+ /etc/neutron/neutron.conf:
+ ```
+ [DEFAULT]
+core_plugin = ml2
+** service_plugins = router **
+allow_overlapping_ips = true
+transport_url = rabbit://openstack:qwe123qwe@controller
+auth_strategy = keystone
+notify_nova_on_port_status_changes = true
+notify_nova_on_port_data_changes = true
+
+[database]
+connection = mysql+pymysql://neutron:qwe123qwe@controller/neutron
+
+[keystone_authtoken]
+www_authenticate_uri = http://controller:5000
+auth_url = http://controller:5000
+memcached_servers = controller:11211
+auth_type = password
+project_domain_name = default
+user_domain_name = default
+project_name = service
+username = neutron
+password = qwe123qwe
+
+[nova]
+auth_url = http://controller:5000
+auth_type = password
+project_domain_name = default
+user_domain_name = default
+region_name = RegionOne
+project_name = service
+username = nova
+password = qwe123qwe
+
+[oslo_concurrency]
+lock_path = /var/lib/neutron/tmp
+
+ ```
