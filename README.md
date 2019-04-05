@@ -10,7 +10,7 @@ Passos para aula de OpenStack
 # yum install openstack-selinux -y
 ```
 
-# Controller Node
+# Controller Node [aqui](ControllerNode.md)
 #### Instalando MariaDB
 ```sh
 # yum install mariadb mariadb-server python2-PyMySQL -y
