@@ -707,7 +707,7 @@ sysctl -w net.bridge.bridge-nf-call-iptables=1
 sysctl -w net.bridge.bridge-nf-call-ip6tables=1
 ```
 
-### Garantindo serviços ativos do Neutron no Controller Node
+### Garantindo serviços ativos do Neutron no Compute Node
 ```SH
 # systemctl enable neutron-linuxbridge-agent.service
 # systemctl start neutron-linuxbridge-agent.service
