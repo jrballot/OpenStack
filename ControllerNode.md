@@ -1,6 +1,9 @@
 # Controller Node
 
 #### Instalando MariaDB
+![mariadb](https://mariadb.org/wp-content/uploads/2019/01/mariadb_org_rgb_h-1.png)
+
+
 ```sh
 # yum install mariadb mariadb-server python2-PyMySQL -y
 ```
@@ -28,7 +31,7 @@ Agora rode o comando mysql_secure_installation:
 ```
 
 #### Instalando Message Queue
-[rabbit](https://www.loadbalancer.org/public/images/articles/2018/05/logo-rabbitmq.png)
+![rabbit](https://www.loadbalancer.org/public/images/articles/2018/05/logo-rabbitmq.png)
 
 ```sh
 # yum install rabbitmq-server -y
@@ -44,7 +47,7 @@ rabbitmqctl set_permissions openstack ".*" ".*" ".*"
 ```
 
 #### Instalando o Memcached
-[memcahed](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOfwdgZXlF2-rE7yeu_dDrMluzvy4NdDLRTp46WjtGaHV5OPh-)
+![memcahed](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOfwdgZXlF2-rE7yeu_dDrMluzvy4NdDLRTp46WjtGaHV5OPh-)
 
 
 ```sh
