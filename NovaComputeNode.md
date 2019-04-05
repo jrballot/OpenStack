@@ -1,5 +1,6 @@
+![nova](https://www.cloudinfrastack.com/img/nova_logo.png)
+
 # Configurando Nova no Compute Node
-## Instalando Nova na Compute01
 
 #### Instalando pacote nova-compute
 ```SH
