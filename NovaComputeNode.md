@@ -1,4 +1,4 @@
-![nova](https://www.cloudinfrastack.com/img/nova_logo.png)
+![nova](https://blog.yarwood.me.uk/img/nova.png)
 
 # Configurando Nova no Compute Node
 
