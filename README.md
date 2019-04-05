@@ -502,7 +502,7 @@ novncproxy_base_url = http://controller:6080/vnc_auto.html
 ```
 
 
-## Instalando Neutron no Controller Node
+## Instalando Neutron no Controller Node []()
 ### Criando Banco e Privilégios
 
 ```SH
@@ -656,7 +656,7 @@ metadata_proxy_shared_secret = qwe123qwe
 # systemctl restart openstack-nova-api.service
 ```
 
-## Configurando Neutron no Compute Node
+## Configurando Neutron no Compute Node [aqui](NeutronComputeNode.md)
 ### Instalando Neutron no Compute Node
 ```SH
 # yum install openstack-neutron-linuxbridge ebtables ipset
