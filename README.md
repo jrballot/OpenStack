@@ -508,8 +508,8 @@ novncproxy_base_url = http://controller:6080/vnc_auto.html
 ```SH
 
 MariaDB [(none)] CREATE DATABASE neutron;
-MariaDB [(none)]> GRANT ALL PRIVILEGES ON neutron.* TO 'neutron'@'localhost' IDENTIFIED BY 'NEUTRON_DBPASS';
-MariaDB [(none)]> GRANT ALL PRIVILEGES ON neutron.* TO 'neutron'@'%' IDENTIFIED BY 'NEUTRON_DBPASS';
+MariaDB [(none)]> GRANT ALL PRIVILEGES ON neutron.* TO 'neutron'@'localhost' IDENTIFIED BY 'qwe123qwe';
+MariaDB [(none)]> GRANT ALL PRIVILEGES ON neutron.* TO 'neutron'@'%' IDENTIFIED BY 'qwe123qwe';
 ```
 
 ### Adicionando usuário Neutron ao projeto Service
@@ -532,7 +532,7 @@ source admin-rc
 ### Configurando Neutron
  /etc/neutron/neutron.conf:
  ```
- [DEFAULT]
+[DEFAULT]
 core_plugin = ml2
 service_plugins = router
 allow_overlapping_ips = true
