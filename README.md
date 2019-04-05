@@ -2,7 +2,8 @@
 
 # OpenStack
 
-Esse passo-a-passo tem como objetivo instruir alguém que queira instalar o OpenStack de forma manual. Apesar de desconsiderar fortemente a realização da implementação do OpenStack de forma manual, a utilização dessa para entendimento de todos os componentes, e como as integrações acontecem, é de extrema valia para evolução de um profissional de cloud.
+Esse passo-a-passo tem como objetivo instruir alguém que queira instalar o OpenStack de forma manual. Apesar de desconsiderar fortemente a realização da implementação do OpenStack de forma manual, a utilização dessa para entendimento de todos os componentes, e como as integrações acontecem, é de extrema valia para evolução de um profissional de cloud. Para uma implementação automatizada, recomendo utilizar ferramentas de gerênciamento de configuração como Ansible, Puppet e Chef
+
 
 Sistema Operacional utilizado: **CENTOS 7 64-bit (7.6.1810)**
 Versão OpenStack utilizada: **Rocky**
