@@ -1,9 +1,18 @@
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/OpenStack%C2%AE_Logo_2016.svg/1200px-OpenStack%C2%AE_Logo_2016.svg.png)
 
 # OpenStack
-Passos para aula de OpenStack
+
+Esse passo-a-passo tem como objetivo instruir alguém que queira instalar o OpenStack de forma manual. Apesar de desconsiderar fortemente a realização da implementação do OpenStack de forma manual, a utilização dessa para entendimento de todos os componentes, e como as integrações acontecem, é de extrema valia para evolução de um profissional de cloud.
+
+Sistema Operacional utilizado: **CENTOS 7 64-bit (7.6.1810)**
+Versão OpenStack utilizada: **Rocky**
+Utilização de OpenVSwith: **NÃO**
+Utilização de Storage com CEPH: **NÃO**
 
 # TODAS AS MAQUINAS
+
+As instruções que seguem devem ser realizadas em **TODAS** as maquinas antes de começar a instalação dos serviços do OpenStack
+
 ```sh
 # yum install centos-release-openstack-rocky -y
 # yum install python-openstackclient -y
