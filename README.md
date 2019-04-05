@@ -431,7 +431,7 @@ Validando configuração:
 ```
 
 ## Compute Node
-## Instalando Nova na Compute01
+## Instalando Nova na Compute01 [AQUI](NovaComputeNode.md)
 
 #### Instalando pacote nova-compute
 ```SH
