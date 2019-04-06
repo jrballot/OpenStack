@@ -127,7 +127,6 @@ verbose = True
 dnsmasq_config_file = /etc/neutron/dnsmasq-neutron.conf
 ```
 
-**FALTOU CRIAR ESSE ARQUIVO**
 ### Criando arquivo dnsmasq-neutron.conf
 vim /etc/neutron/dnsmasq-neutron.conf
 ```SH
