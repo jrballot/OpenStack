@@ -127,6 +127,12 @@ verbose = True
 dnsmasq_config_file = /etc/neutron/dnsmasq-neutron.conf
 ```
 
+### Criando arquivo dnsmasq-neutron.conf
+vim /etc/neutron/dnsmasq-neutron.conf
+```SH
+dhcp-option-force=26,1450
+```
+
 ### Configurando Agent Metadata
 /etc/neutron/metadata_agent.ini:
 ```SH
