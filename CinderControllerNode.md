@@ -1,11 +1,16 @@
 # Configurando Cinder Block Storage na Controller Node
+
+## Configurando Banco de Dados para Cinder
+
 ```SH
 
 mysql -u root -p
 MariaDB [(none)]> CREATE DATABASE cinder;
 MariaDB [(none)]> GRANT ALL PRIVILEGES ON cinder.* TO 'cinder'@'localhost' IDENTIFIED BY 'qwe123qwe';
 MariaDB [(none)]> GRANT ALL PRIVILEGES ON cinder.* TO 'cinder'@'%' IDENTIFIED BY 'qwe123qwe';
-
+```
+## Configurando Usuario e Endpooint para o Cinder
+```SH
 source admin-rc 
 {admin}> openstack user create  --domain default --password-prompt cinder
 {admin}> openstack role add --project service --user cinder admin
@@ -17,13 +22,17 @@ source admin-rc
 {admin}> openstack endpoint create --region RegionOne   volumev3 public http://controller:8776/v3/%\(project_id\)s
 {admin}> openstack endpoint create --region RegionOne   volumev3 internal http://controller:8776/v3/%\(project_id\)s
 {admin}> openstack endpoint create --region RegionOne   volumev3 admin http://controller:8776/v3/%\(project_id\)s
+```
 
-
+## Instalando o Cinder na Controller Node
+```SH
 yum install -y openstack-cinder
-vim /etc/cinder/cinder.conf 
-cp  /etc/cinder/cinder.conf /etc/cinder/cinder.conf.ORIGINAL
+```
 
+## Confiurando Cinder
 vim /etc/cinder/cinder.conf:
+```SH
+
 [DEFAULT]
 transport_url = rabbit://openstack:qwe123qwe@controller
 auth_strategy = keystone
@@ -45,16 +54,26 @@ password = qwe123qwe
 
 [oslo_concurrency]
 lock_path = /var/lib/cinder/tmp
-
+```
+## Populando banco do Cinder
+```SH
 su -s /bin/sh -c "cinder-manage db sync" cinder
+```
+**===== Configuração que Segue deve ser feita na Compute Node =====**
+## Configurando Nova na Compute Node
 
-/etc/nova/nova.conf
+vim /etc/nova/nova.conf:
+```SH
 [cinder]
 os_region_name = RegionOne
+```
+**=====+=====**
 
+
+## Reiniciando serviços na Controller Node
+
+```SH
 systemctl restart openstack-nova-api
 systemctl enable openstack-cinder-api.service openstack-cinder-scheduler.service
 systemctl start openstack-cinder-api.service openstack-cinder-scheduler.service
-
-
 ```
