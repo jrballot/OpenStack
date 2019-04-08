@@ -1,6 +1,6 @@
 # Configurando o Cinder Block Storage na Storage Node
 
-!(cinder)[https://blog.purestorage.com/wp-content/uploads/2017/08/OpenStack_Project_Cinder_vertical-300x250.png]
+![cinder](https://blog.purestorage.com/wp-content/uploads/2017/08/OpenStack_Project_Cinder_vertical-300x250.png)
 
 
 **ANTES DE INICIAR A MAQUINA STORAGE ADICIONE UM NOVO HD**
