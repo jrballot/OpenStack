@@ -1,6 +1,6 @@
 ## Instalando Horizon na Controller Node
 
-!(horizon)[https://git.garr.it/uploads/-/system/project/avatar/70/OpenStack_Project_Horizon_vertical.jpg)
+![horizon](https://git.garr.it/uploads/-/system/project/avatar/70/OpenStack_Project_Horizon_vertical.jpg)
 
 ## Instalando Dashboard
 ```SH
