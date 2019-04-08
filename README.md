@@ -681,4 +681,4 @@ sysctl -w net.bridge.bridge-nf-call-ip6tables=1
 # su -s /bin/sh -c "nova-manage cell_v2 discover_hosts --verbose" nova
 ```
 
-# Instalando HORIZON (OpenStack Dashboard)
+# Instalando HORIZON ([OpenStack Dashboard](HorizonControllerNode.md))
