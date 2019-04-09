@@ -82,3 +82,7 @@ vim /etc/selinux/config
 ```SH
 SELINUX=permissive
 ```
+User o comando setenforce para desativar o SELinux:
+```SH
+setenforce 0
+```
