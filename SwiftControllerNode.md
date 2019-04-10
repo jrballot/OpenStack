@@ -1,17 +1,21 @@
 # Instalando Swift
 
 ## Configurando usuário e domínio Controller Node
-
+```
 {admin}> openstack user create --domain default --password-prompt swift
 {admin}> openstack role add --project service --user swift admin
 {admin}> openstack service create --name swift --description "OpenStack Object Storage" object-store
 {admin}> openstack endpoint create --region RegionOne object-store public http://controller:8080/v1/AUTH_%\(project_id\)s
 {admin}> openstack endpoint create --region RegionOne object-store internal http://controller:8080/v1/AUTH_%\(project_id\)s
 {admin}> openstack endpoint create --region RegionOne object-store admin http://controller:8080/v1
+```
+
 
 ## Instalando Pacotes na Controller Node
+```
 yum install openstack-swift-proxy python-swiftclient python-keystoneclient python-keystonemiddleware
 curl -o /etc/swift/proxy-server.conf https://git.openstack.org/cgit/openstack/swift/plain/etc/proxy-server.conf-sample?h=stable/rocky
+```
 
 ## Condigurando Swift proxy-server
 vim /etc/swift/proxy-server.conf:
