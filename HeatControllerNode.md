@@ -1,4 +1,4 @@
-!(heat)[http://blogs.vmware.com/openstack/files/2017/12/images.png]
+![heat](http://blogs.vmware.com/openstack/files/2017/12/images.png)
 ## Instalando Heat
 ```
 CREATE DATABASE heat;
