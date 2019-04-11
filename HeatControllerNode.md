@@ -36,16 +36,18 @@ source admin-rc
 ```
 
 ## Criando domínio, usuários e adicionando roles para Heat
+```
 {admin}> openstack domain create --description "Stack projects and users" heat
 {admin}> openstack user create --domain heat --password-prompt heat_domain_admin
 {admin}> openstack role add --domain heat --user-domain heat --user heat_domain_admin admin
 {admin}> openstack role create heat_stack_owner
 {admin}> openstack role add --project ballot --user julio heat_stack_owner
 {admin}> openstack role create heat_stack_user
- 
+```
 ## Instalando HEAT-API e HEAT-API-CFN e HEAT-ENGINE
-yum install openstack-heat-api openstack-heat-api-cfn   openstack-heat-engine
-
+```
+yum install -y openstack-heat-api openstack-heat-api-cfn   openstack-heat-engine
+```
 ## Configurando HEAT
 vim /etc/heat/heat.conf:
 ```
@@ -84,15 +86,20 @@ auth_uri = http://controller:5000
 
 ```
 ## Populando Database do HEAT:
+```
 su -s /bin/sh -c "heat-manage db_sync" heat
+```
 
+## Iniciando e Garantindo serviços ativos no boot 
+```
 systemctl enable openstack-heat-api.service   openstack-heat-api-cfn.service openstack-heat-engine.service
 systemctl start openstack-heat-api.service   openstack-heat-api-cfn.service openstack-heat-engine.service
 systemctl status openstack-heat-api.service   openstack-heat-api-cfn.service openstack-heat-engine.service
+```
 
 ## Verificando Instalação:
-
+```
 openstack orchestration service list
-
+```
 
 
