@@ -40,7 +40,7 @@ operator_roles = admin,user
 [filter:authtoken]
 paste.filter_factory = keystonemiddleware.auth_token:filter_factory
 www_authenticate_uri = http://controller:5000
-auth_url = http://controller:35357
+auth_url = http://controller:5000
 memcached_servers = controller:11211
 auth_type = password
 project_domain_id = default
