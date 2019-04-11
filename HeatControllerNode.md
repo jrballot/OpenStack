@@ -77,7 +77,7 @@ password = qwe123qwe
 
 [trustee]
 auth_type = password
-auth_url = http://controller:35357
+auth_url = http://controller:5000
 username = heat
 password = qwe123qwe
 user_domain_name = default
