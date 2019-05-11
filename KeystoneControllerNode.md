@@ -1,4 +1,4 @@
-![](https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwiZ7cHkupPiAhUoGbkGHe6HDi8QjRx6BAgBEAU&url=https%3A%2F%2Fvexxhost.com%2Fpublic-cloud%2Fidentity%2F&psig=AOvVaw2nDUnfoPPE9sTBS7SOCljE&ust=1557663478271727)
+![](https://vexxhost.com/wp-content/uploads/2017/05/OpenStack_Project_Keystone_vertical-1-300x250.png)
 
 
 ## Instalando Keystone na Controller
