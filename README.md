@@ -9,6 +9,9 @@ Esse passo-a-passo tem como objetivo instruir alguém que queira instalar o Open
  * Versão OpenStack utilizada: **Rocky**
  * Utilização de OpenVSwith: **NÃO**
  * Utilização de Storage com CEPH: **NÃO**
+ 
+ (admin)#  <- Linhas iniciadas com esse prefixo devem ser executadas com conta admin do OpenStack autenticada.
+ (user)# <- Linhas iniciadas com esse prefixo devem ser executadas com conta de USUARIO do OpenStack autenticada.
 
 # TODAS AS MAQUINAS
 
