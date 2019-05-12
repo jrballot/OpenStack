@@ -25,196 +25,22 @@ As instruções que seguem devem ser realizadas em **TODAS** as maquinas antes d
 ```
 
 # Controller Node [aqui](ControllerNode.md)
+ - MariaDB
+ - Memcached
+ - RabbitMQ
 
 # Demais serviços do Core OpenStack
 
 ## [Instalando Keystone na Controller](KeystoneControllerNode.md) 
+ - Keystone
+ - HTTPd
+ - HTTPd mod_wsgi
+ 
 
-### Configurando o MariaDB
-MariaDB
-```
-CREATE DATABASE keystone;
-GRANT ALL PRIVILEGES ON keystone.* TO 'keystone'@'localhost' IDENTIFIED BY 'KEYSTONE_DBPASS';
-GRANT ALL PRIVILEGES ON keystone.* TO 'keystone'@'%' IDENTIFIED BY 'KEYSTONE_DBPASS';
-```
-Instalando Keystone
-```
-# yum install openstack-keystone httpd mod_wsgi
-```
-
-Agora edite o keystone.conf em /etc/keystone, adicionando os seguintes parametros:
-```
-[database]
-connection = mysql+pymysql://keystone:KEYSTONE_DBPASS@controller/keystone
-.
-.
-.
-[token]
-provider = fernet
-```
-### Populando a base de dados do MariaDB
-Agora conseguimos popular a database com comando keystone-manage db_sync:
-
-```sh
-# su -s /bin/sh -c "keystone-manage db_sync" keystone
-```
-
-```SH
-keystone-manage fernet_setup --keystone-user keystone --keystone-group keystone
-keystone-manage credential_setup --keystone-user keystone --keystone-group keystone
-keystone-manage bootstrap --bootstrap-password qwe123qwe --bootstrap-admin-url http://controller:5000/v3/ --bootstrap-internal-url http://controller:5000/v3/ --bootstrap-public-url http://controller:5000/v3/ --bootstrap-region-id RegionOne
-```
-
-### Configurando HTTPd para redirecionar o WSGI
-Definir o ServerName para controller no HTTPd
-```SH
-# ln -s /usr/share/keystone/wsgi-keystone.conf /etc/httpd/conf.d/
-# systemctl enable httpd.service
-# systemctl start httpd.service
-```
-
-Variáveis de ambiente para logar no OpenStack
-
-```SH
-$ export OS_USERNAME=admin
-$ export OS_PASSWORD=ADMIN_PASS
-$ export OS_PROJECT_NAME=admin
-$ export OS_USER_DOMAIN_NAME=Default
-$ export OS_PROJECT_DOMAIN_NAME=Default
-$ export OS_AUTH_URL=http://controller:5000/v3
-$ export OS_IDENTITY_API_VERSION=3
-```
-
-### Configurando Dominios e Projetos
-```sh
-# openstack project create --domain default --description "Service Project" service
-# openstack project create --domain default --description "<SEU_NOME> Project" <SEU_NOME>
-$ openstack user create --domain default --password-prompt <SEU_USUARIO>
-$ openstack role create <SUA_ROLE>
-$ openstack role add --project <SEU_PROJETO> --user <SEU_USUARIO> <SUA_ROLE>
-```
-
-### Validando autenticacao no Keystone
-
-Remova a definição das variáveis OS_PASSWORD e OS_AUTH_URL:
-Agora podemos testar a autenticação solicitando um token de acesso
-
-```SH
-openstack --os-auth-url http://controller:5000/v3 --os-project-domain-name Default --os-user-domain-name Default --os-project-name admin --os-username admin token issue
-$ openstack --os-auth-url http://controller:5000/v3 --os-project-domain-name Default --os-user-domain-name Default --os-project-name myproject --os-username myuser token issue
-```
-
-## Instalando Glance no Controller
-
-### Instalando o Glance:
-```SH
-# yum install -y openstack-glance
-```
-
-### Criando Base de dados e Privilégios para Glance
-```SH
-# mysql -u root -p
-MariaDB [(none)]> CREATE DATABASE glance;
-MariaDB [(none)]> GRANT ALL PRIVILEGES ON glance.* TO 'glance'@'localhost' IDENTIFIED BY 'qwe123qwe';
-MariaDB [(none)]> GRANT ALL PRIVILEGES ON glance.* TO 'glance'@'%' IDENTIFIED BY 'qwe123qwe';
-```
-
-### Criando usuário e serviço para o Glance
-```SH
-source admin-rc
-openstack user create --domain default --password-prompt glance
-openstack role add --project service --user glance admin
-openstack service create --name glance --description "OpenStack Image" image
-```
-### Criando Endpoints para o Glance
-```SH
-openstack endpoint create --region RegionOne image public http://controller:9292
-openstack endpoint create --region RegionOne image internal http://controller:9292
-openstack endpoint create --region RegionOne image admin http://controller:9292
-```
-### Arquivos de configuração do Glance:
-
-/etc/glance/glance-api.conf:
-```
-[database]
-connection = mysql+pymysql://glance:qwe123qwe@controller/glance
-
-[keystone_authtoken]
-www_authenticate_uri  = http://controller:5000
-auth_url = http://controller:5000
-memcached_servers = controller:11211
-auth_type = password
-project_domain_name = Default
-user_domain_name = Default
-project_name = service
-username = glance
-password = qwe123qwe
-
-[paste_deploy]
-flavor = keystone
-
-[glance_store]
-stores = file,http
-default_store = file
-filesystem_store_datadir = /var/lib/glance/images/
-```
-
-/etc/glance/glance-registry.conf
-```
-[database]
-connection = mysql+pymysql://glance:GLANCE_DBPASS@controller/glance
-
-[keystone_authtoken]
-www_authenticate_uri = http://controller:5000
-auth_url = http://controller:5000
-memcached_servers = controller:11211
-auth_type = password
-project_domain_name = Default
-user_domain_name = Default
-project_name = service
-username = glance
-password = GLANCE_PASS
-
-[paste_deploy]
-flavor = keystone
-```
-
-### Populando o banco do Glance:
-```SH
-# su -s /bin/sh -c "glance-manage db_sync" glance
-```
-
-### Garantir serviço ativo e rodando:
-```SH
-# systemctl enable openstack-glance-api.service openstack-glance-registry.service
-# systemctl start openstack-glance-api.service openstack-glance-registry.service
-```
-
-### Baixando e Criando Imagens para o OpenStack
-Baixando imagem do CirrOS:
-```SH
-# curl -O ht://download.cirros-cloud.net/0.3.5/cirros-0.3.5-x86_64-disk.img
-# openstack image create "Cirros 0.3.5" --file cirros-0.3.5-x86_64-disk.img --disk-format qcow2 --container-format bare --publico
-```
-**(NÃO RODAR ESSE COMANDO)** Baixando imagem do Ubuntu Trusty 14.04 LTS:
-```SH
-curl -O https://cloud-images.ubuntu.com/trusty/current/trusty-server-cloudimg-amd64-disk1.img
-openstack image create "Ubuntu Trusty 14.04" --file trusty-server-cloudimg-amd64-disk1.img --disk-format qcow2 --container-format bare --public
-```
-
-**(NÃO RODAR ESSE COMANDO)** Baixando image do Ubuntu Bionic 18.04 LTS:
-```SH
-curl -O http://cloud-images.ubuntu.com/minimal/releases/bionic/release/ubuntu-18.04-minimal-cloudimg-amd64.img
-openstack image create "Ubuntu Bionic 18.04 LTS" --file ubuntu-18.04-minimal-cloudimg-amd64.img -disk-format qcow2 --container-format bare --public
-```
-
-### Garantindo serviços na inicialização
-
-```SH
-systemctl enable openstack-glance-api.service openstack-glance-registry.service
-systemctl start openstack-glance-api.service openstack-glance-registry.service
-```
-
+## [Instalando Glance no Controller](GlanceControllerNode.md)
+ - OpenStack Glance (Registry e API)
+ 
+ 
 ## Instalando Nova no Controller
 #### Criar a base de dados
 ```SH
