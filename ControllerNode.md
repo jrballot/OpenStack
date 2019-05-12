@@ -8,7 +8,7 @@
 # yum install mariadb mariadb-server python2-PyMySQL -y
 ```
 
-Edite o arquivo /etc/my.cnf com conteúdo que segue abaixo da entrda [mysqld]:
+Edite o arquivo /etc/my.cnf com conteúdo que segue abaixo da entrada [mysqld]:
 ```
 bind-address = 10.0.10.11
 default-storage-engine = innodb
