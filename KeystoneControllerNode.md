@@ -62,15 +62,18 @@ export PS1='[\u@\h \W]($OS_USERNAME)\$ '
 
 Salve essas configurações no arquivo admin-rc no diretório local, para reutilizarmos para autenticação.
 
-
+```SH
+# source admin-rc
+(admin)#
+```
 
 ### Configurando Dominios e Projetos
 ```sh
-# openstack project create --domain default --description "Service Project" service
-# openstack project create --domain default --description "<SEU_NOME> Project" <SEU_NOME>
-# openstack user create --domain default --password-prompt <SEU_USUARIO>
-# openstack role create <SUA_ROLE>
-# openstack role add --project <SEU_PROJETO> --user <SEU_USUARIO> <SUA_ROLE>
+(admin)# openstack project create --domain default --description "Service Project" service
+(admin)# openstack project create --domain default --description "<SEU_NOME> Project" <SEU_NOME>
+(admin)# openstack user create --domain default --password-prompt <SEU_USUARIO>
+(admin)# openstack role create <SUA_ROLE>
+(admin)# openstack role add --project <SEU_PROJETO> --user <SEU_USUARIO> <SUA_ROLE>
 ```
 
 ### Validando autenticacao no Keystone
