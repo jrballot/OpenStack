@@ -41,7 +41,7 @@ As instruções que seguem devem ser realizadas em **TODAS** as maquinas antes d
  - OpenStack Glance (Registry e API)
  
  
-## Instalando Nova no Controller
+## [Instalando Nova no Controller](NovaControllerNode.md)
 #### Criar a base de dados
 ```SH
 CREATE DATABASE nova_api;
@@ -186,7 +186,7 @@ Edite o arquivo /etc/httpd/conf.d/00-nova-placement-api.conf:
 
 ***Não esquecer de reiniciar o HTTPd:***
 ```SH
-systemctl restart httpd
+# systemctl restart httpd
 ```
 
 ### Populando base de dados do Nova-API e Placement
@@ -214,7 +214,7 @@ Validando configuração:
 ```
 
 ## Compute Node
-## Instalando Nova na Compute01 [AQUI](NovaComputeNode.md)
+## [Instalando Nova na Compute01](NovaComputeNode.md)
 
 #### Instalando pacote nova-compute
 ```SH
@@ -285,7 +285,7 @@ novncproxy_base_url = http://controller:6080/vnc_auto.html
 ```
 
 
-## Instalando Neutron no Controller Node []()
+## [Instalando Neutron no Controller Node](NeutronControllerNode.md)
 ### Criando Banco e Privilégios
 
 ```SH
@@ -439,7 +439,7 @@ metadata_proxy_shared_secret = qwe123qwe
 # systemctl restart openstack-nova-api.service
 ```
 
-## Configurando Neutron no Compute Node [aqui](NeutronComputeNode.md)
+## [Configurando Neutron no Compute Node](NeutronComputeNode.md)
 ### Instalando Neutron no Compute Node
 ```SH
 # yum install openstack-neutron-linuxbridge ebtables ipset
@@ -511,4 +511,4 @@ sysctl -w net.bridge.bridge-nf-call-ip6tables=1
 # su -s /bin/sh -c "nova-manage cell_v2 discover_hosts --verbose" nova
 ```
 
-# Instalando HORIZON ([OpenStack Dashboard](HorizonControllerNode.md))
+# [Instalando OpenStack Dashboard Horizon](HorizonControllerNode.md))
