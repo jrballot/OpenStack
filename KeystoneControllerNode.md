@@ -58,7 +58,6 @@ export OS_AUTH_URL=http://controller:5000/v3
 export OS_IDENTITY_API_VERSION=3
 
 export PS1='[\u@\h \W]($OS_USERNAME)\$ '
-
 ```
 
 Salve essas configurações no arquivo admin-rc no diretório local, para reutilizarmos para autenticação.
