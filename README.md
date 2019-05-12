@@ -10,9 +10,10 @@ Esse passo-a-passo tem como objetivo instruir alguém que queira instalar o Open
  * Utilização de OpenVSwith: **NÃO**
  * Utilização de Storage com CEPH: **NÃO**
  
+ ```SH
  (admin)#  <- Linhas iniciadas com esse prefixo devem ser executadas com conta admin do OpenStack autenticada.
  (user)# <- Linhas iniciadas com esse prefixo devem ser executadas com conta de USUARIO do OpenStack autenticada.
-
+```
 # TODAS AS MAQUINAS
 
 As instruções que seguem devem ser realizadas em **TODAS** as maquinas antes de começar a instalação dos serviços do OpenStack
