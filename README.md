@@ -27,7 +27,7 @@ As instruções que seguem devem ser realizadas em **TODAS** as maquinas antes d
 
 # Demais serviços do Core OpenStack
 
-## Instalando Keystone na Controller
+## [Instalando Keystone na Controller](KeystoneControllerNode.md) 
 
 ### Configurando o MariaDB
 MariaDB
