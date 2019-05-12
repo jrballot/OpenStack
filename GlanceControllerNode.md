@@ -16,15 +16,15 @@ MariaDB [(none)]> GRANT ALL PRIVILEGES ON glance.* TO 'glance'@'%' IDENTIFIED BY
 ### Criando usuário e serviço para o Glance
 ```SH
 source admin-rc
-openstack user create --domain default --password-prompt glance
-openstack role add --project service --user glance admin
-openstack service create --name glance --description "OpenStack Image" image
+(admin)# openstack user create --domain default --password qwe123qwe glance
+(admin)# openstack role add --project service --user glance admin
+(admin)# openstack service create --name glance --description "OpenStack Image" image
 ```
 ### Criando Endpoints para o Glance
 ```SH
-openstack endpoint create --region RegionOne image public http://controller:9292
-openstack endpoint create --region RegionOne image internal http://controller:9292
-openstack endpoint create --region RegionOne image admin http://controller:9292
+(admin)# openstack endpoint create --region RegionOne image public http://controller:9292
+(admin)# openstack endpoint create --region RegionOne image internal http://controller:9292
+(admin)# openstack endpoint create --region RegionOne image admin http://controller:9292
 ```
 ### Arquivos de configuração do Glance:
 
@@ -87,24 +87,24 @@ flavor = keystone
 ### Baixando e Criando Imagens para o OpenStack
 Baixando imagem do CirrOS:
 ```SH
-# curl -O ht://download.cirros-cloud.net/0.3.5/cirros-0.3.5-x86_64-disk.img
-# openstack image create "Cirros 0.3.5" --file cirros-0.3.5-x86_64-disk.img --disk-format qcow2 --container-format bare --publico
+(admin)# curl -O http://download.cirros-cloud.net/0.3.5/cirros-0.3.5-x86_64-disk.img
+(admin)# openstack image create "Cirros 0.3.5" --file cirros-0.3.5-x86_64-disk.img --disk-format qcow2 --container-format bare --public
 ```
 **(NÃO RODAR ESSE COMANDO)** Baixando imagem do Ubuntu Trusty 14.04 LTS:
 ```SH
-curl -O https://cloud-images.ubuntu.com/trusty/current/trusty-server-cloudimg-amd64-disk1.img
-openstack image create "Ubuntu Trusty 14.04" --file trusty-server-cloudimg-amd64-disk1.img --disk-format qcow2 --container-format bare --public
+(admin)# curl -O https://cloud-images.ubuntu.com/trusty/current/trusty-server-cloudimg-amd64-disk1.img
+(admin)# openstack image create "Ubuntu Trusty 14.04" --file trusty-server-cloudimg-amd64-disk1.img --disk-format qcow2 --container-format bare --public
 ```
 
 **(NÃO RODAR ESSE COMANDO)** Baixando image do Ubuntu Bionic 18.04 LTS:
 ```SH
-curl -O http://cloud-images.ubuntu.com/minimal/releases/bionic/release/ubuntu-18.04-minimal-cloudimg-amd64.img
-openstack image create "Ubuntu Bionic 18.04 LTS" --file ubuntu-18.04-minimal-cloudimg-amd64.img -disk-format qcow2 --container-format bare --public
+(admin)# curl -O http://cloud-images.ubuntu.com/minimal/releases/bionic/release/ubuntu-18.04-minimal-cloudimg-amd64.img
+(admin)# openstack image create "Ubuntu Bionic 18.04 LTS" --file ubuntu-18.04-minimal-cloudimg-amd64.img -disk-format qcow2 --container-format bare --public
 ```
 
 ### Garantindo serviços na inicialização
 
 ```SH
-systemctl enable openstack-glance-api.service openstack-glance-registry.service
-systemctl start openstack-glance-api.service openstack-glance-registry.service
+(admin)# systemctl enable openstack-glance-api.service openstack-glance-registry.service
+(admin)# systemctl start openstack-glance-api.service openstack-glance-registry.service
 ```
