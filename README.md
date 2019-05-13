@@ -49,15 +49,21 @@ As instruções que seguem devem ser realizadas em **TODAS** as maquinas antes d
  - OpenStack Nova NoVNCProxy
  
 ## [Instalando Nova na Compute01](NovaComputeNode.md)
-
+ - OpenStack Nova Compute
 
 ## [Instalando Neutron no Controller Node](NeutronControllerNode.md)
-
+ - OpenStack Neutron
+ - OpenStack Neutron ML2
+ - OpenStack Neutron LinuxBridge
+ - ebtables
 
 ## [Configurando Neutron no Compute Node](NeutronComputeNode.md)
-
+ - OpenStack Neutron LinuxBridge
+ - ebtables
+ - ipset
 
 ## [Instalando OpenStack Dashboard Horizon](HorizonControllerNode.md)
+ - OpenStack Dashboard
 
 ## [Instalando OpenStack Cinder no Controller Node](CinderControllerNode.md)
 
