@@ -57,7 +57,7 @@ As instruções que seguem devem ser realizadas em **TODAS** as maquinas antes d
 ## [Configurando Neutron no Compute Node](NeutronComputeNode.md)
 
 
-## [Instalando OpenStack Dashboard Horizon](HorizonControllerNode.md))
+## [Instalando OpenStack Dashboard Horizon](HorizonControllerNode.md)
 
 ## [Instalando OpenStack Cinder no Controller Node](CinderControllerNode.md)
 
