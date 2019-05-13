@@ -22,6 +22,7 @@ As instruções que seguem devem ser realizadas em **TODAS** as maquinas antes d
 # yum install centos-release-openstack-rocky -y
 # yum install python-openstackclient -y
 # yum install openstack-selinux -y
+# yum install vim chrony -y
 ```
 
 # Controller Node [aqui](ControllerNode.md)
