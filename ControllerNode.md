@@ -35,8 +35,8 @@ Agora rode o comando mysql_secure_installation:
 
 ```sh
 # yum install rabbitmq-server -y
-# systemctl enable rabbitmq-server.service -y
-# systemctl start rabbitmq-server.service -y
+# systemctl enable rabbitmq-server.service
+# systemctl start rabbitmq-server.service
 ```
 
 Agora configure com usuário openstack dentro do rabbitmq:
