@@ -12,7 +12,7 @@ Esse passo-a-passo tem como objetivo instruir alguém que queira instalar o Open
  
  ```SH
  (admin)#  <- Linhas iniciadas com esse prefixo devem ser executadas com conta admin do OpenStack autenticada.
- (user)# <- Linhas iniciadas com esse prefixo devem ser executadas com conta de USUARIO do OpenStack autenticada.
+ (user)# <- Linhas iniciadas com esse prefixo devem ser executadas com conta do SEU USUÁRIO do OpenStack autenticada.
 ```
 # TODAS AS MAQUINAS
 
