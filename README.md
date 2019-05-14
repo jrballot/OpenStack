@@ -40,6 +40,15 @@ As instruções que seguem devem ser realizadas em **TODAS** as maquinas antes d
 ## [Instalando Glance no Controller](GlanceControllerNode.md)
  - OpenStack Glance (Registry e API) 
  
+ 
+## Antes de iniciar a instalação do NOVA e NEUTRON
+
+### Desative o Firewalld nas maquinas
+```SH
+# systemctl stop firewalld
+# systemctl disable firewalld
+```
+ 
 ## [Instalando Nova no Controller](NovaControllerNode.md)
  - OpenStack Nova API
  - OpenStack Nova Scheduler
