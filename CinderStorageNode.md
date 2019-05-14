@@ -70,7 +70,10 @@ target_helper = lioadm
 
 [oslo_concurrency]
 lock_path = /var/lib/cinder/tmp
+```
+## Garantindo serviços na inicialização da Storage Node
 
+```SH
 systemctl enable openstack-cinder-volume.service target.service
 systemctl start openstack-cinder-volume.service target.service
 
