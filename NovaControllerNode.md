@@ -1,10 +1,10 @@
 # Instalando Nova no Controller
 #### Criar a base de dados
 ```SH
-CREATE DATABASE nova_api;
-CREATE DATABASE nova;
-CREATE DATABASE nova_cell0;
-CREATE DATABASE placement;
+MariaDB [(none)]> CREATE DATABASE nova_api;
+MariaDB [(none)]> CREATE DATABASE nova;
+MariaDB [(none)]> CREATE DATABASE nova_cell0;
+MariaDB [(none)]> CREATE DATABASE placement;
 ```
 
 #### Criando o permisionamento da base de dados
@@ -52,12 +52,12 @@ openstack endpoint create --region RegionOne placement admin http://controller:8
 
 ### Instalando Nova
 ```SH
-yum install openstack-nova-api openstack-nova-conductor openstack-nova-console openstack-nova-novncproxy  openstack-nova-scheduler openstack-nova-placement-api
+yum install openstack-nova-api openstack-nova-conductor openstack-nova-console openstack-nova-novncproxy  openstack-nova-scheduler openstack-nova-placement-api -y
 ```
 
 ### Garantir serviços subindo no boot:
 ```SH
-systemctl enable openstack-nova-api openstack-nova-conductor openstack-nova-console openstack-nova-novncproxy  openstack-nova-scheduler openstack-nova-placement-api
+systemctl enable openstack-nova-api openstack-nova-conductor openstack-nova-console openstack-nova-novncproxy  openstack-nova-scheduler
 ```
 
 #### Configurando Nova na Controller
