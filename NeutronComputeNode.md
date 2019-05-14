@@ -4,7 +4,7 @@
 
 ### Instalando Neutron no Compute Node
 ```SH
-# yum install openstack-neutron-linuxbridge ebtables ipset
+# yum install openstack-neutron-linuxbridge ebtables ipset -y
 ```
 ### Configurando Neutron no Compute Node
 /etc/neutron/neutron.conf:
