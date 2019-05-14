@@ -1,10 +1,10 @@
-![nova](https://blog.yarwood.me.uk/img/nova.png)
+[nova](https://blog.yarwood.me.uk/img/nova.png)
 
 # Configurando Nova no Compute Node
 
 #### Instalando pacote nova-compute
 ```SH
-yum install openstack-nova-compute
+yum install openstack-nova-compute -y
 ```
 #### Configurando Nova na Compute
 /etc/nova/nova.conf:
