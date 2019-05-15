@@ -4,7 +4,7 @@
 
 ## Instalando Dashboard
 ```SH
-yum install openstack-dashboard
+yum install openstack-dashboard -y
 ```
 
 ## Configurando Dashboard
