@@ -1,8 +1,8 @@
 # Object Node
 
 **MODIFICAR O AMBIENTE PARA TER DOIS OBJECT SERVERS CONFIGURADOS**
-object01.dexter.com.br 10.0.10.51
-object02.dexter.com.br 10.0.10.52
+ - object01.dexter.com.br 10.0.10.51
+ - object02.dexter.com.br 10.0.10.61
 
 **Adicione dois discos /dev/sdb e /dev/sdc a Maquina Virtual**
 
@@ -55,8 +55,8 @@ yum install openstack-swift-account openstack-swift-container openstack-swift-ob
 curl -o /etc/swift/account-server.conf https://git.openstack.org/cgit/openstack/swift/plain/etc/account-server.conf-sample?h=stable/rocky
 ```
 
-## Adicionar os parâmetros abaixo:
-vim /etc/swift/account-server.conf:
+## Configurando Swift no Object Node
+Adicione os parâmetros de configuração abaixo no arquivo /etc/swift/account-server.conf:
 ```
 
 [DEFAULT]
