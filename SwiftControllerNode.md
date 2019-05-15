@@ -18,7 +18,7 @@ curl -o /etc/swift/proxy-server.conf https://git.openstack.org/cgit/openstack/sw
 ```
 
 ## Condigurando Swift proxy-server
-vim /etc/swift/proxy-server.conf:
+Adicione as configurações abaixo no arquivo /etc/swift/proxy-server.conf:
 ```SH
 [DEFAULT]
 bind_port = 8080
