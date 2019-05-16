@@ -17,7 +17,7 @@ Definindo /dev/sdc como disco gerenciâvel pelo LVM.
 ```
 devices {
 ...
-filter = [ "a/sda/", "a/sdb/", **"a/sdc"**, "r/.*/"]
+filter = [ "a/sda/", "a/sdb/", "a/sdc", "r/.*/"]
 ...
 }
 ```
