@@ -77,3 +77,8 @@ As instruções que seguem devem ser realizadas em **TODAS** as maquinas antes d
 ## [Instalando OpenStack Cinder no Controller Node](CinderControllerNode.md)
 
 ## [Instalando OpenStack Cinder no Storage Node](CinderStorageNode.md)
+
+## [Instalando OpenStack Swift no Controller Node](SwiftControllerNode.md)
+
+## [Instalando OpenStack Swift no Storage Node](SwiftObjectNode.md)
+
