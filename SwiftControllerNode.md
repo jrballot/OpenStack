@@ -14,7 +14,7 @@
 ## Instalando Pacotes na Controller Node
 ```
 yum install openstack-swift-proxy python-swiftclient python-keystoneclient python-keystonemiddleware
-curl -o /etc/swift/proxy-server.conf https://git.openstack.org/cgit/openstack/swift/plain/etc/proxy-server.conf-sample?h=stable/rocky
+curl -L -o /etc/swift/proxy-server.conf https://git.openstack.org/cgit/openstack/swift/plain/etc/proxy-server.conf-sample?h=stable/rocky
 ```
 
 ## Condigurando Swift proxy-server
