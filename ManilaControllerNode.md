@@ -34,7 +34,7 @@ $ openstack endpoint create --region RegionOne sharev2 admin http://controller:8
 ## Instalando OpenStack Manila
 
 ```SH
-# yum install openstack-manila python-manilaclient
+# yum install openstack-manila python-manilaclient -y
 ```
 
 ## Configurando Manila
