@@ -52,7 +52,7 @@ yum install openstack-swift-account openstack-swift-container openstack-swift-ob
 
 ## Baixando arquivos de configuração para account-server
 ```
-curl -o /etc/swift/account-server.conf https://git.openstack.org/cgit/openstack/swift/plain/etc/account-server.conf-sample?h=stable/rocky
+curl -L -o /etc/swift/account-server.conf https://git.openstack.org/cgit/openstack/swift/plain/etc/account-server.conf-sample?h=stable/rocky
 ```
 
 ## Configurando Swift no Object Node
@@ -82,7 +82,7 @@ recon_cache_path = /var/cache/swift
 
 # Baixando arquivo de container do Swift
 ```
-curl -o /etc/swift/container-server.conf https://git.openstack.org/cgit/openstack/swift/plain/etc/container-server.conf-sample?h=stable/rocky
+curl -L -o /etc/swift/container-server.conf https://git.openstack.org/cgit/openstack/swift/plain/etc/container-server.conf-sample?h=stable/rocky
 ```
 
 vim /etc/swift/container-server.conf:
@@ -106,7 +106,7 @@ recon_cache_path = /var/cache/swift
 
 ## Baixando configuração do object server
 ```
-curl -o /etc/swift/object-server.conf https://git.openstack.org/cgit/openstack/swift/plain/etc/object-server.conf-sample?h=stable/rocky
+curl -L -o /etc/swift/object-server.conf https://git.openstack.org/cgit/openstack/swift/plain/etc/object-server.conf-sample?h=stable/rocky
 ```
 
 ## Incluir as alterações
