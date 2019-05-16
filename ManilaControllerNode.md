@@ -2,30 +2,37 @@
 
 ## Criando base de dados do Manila
 
-mysql -u root -p
+```SH
+# mysql -u root -p
 
 CREATE DATABASE manila;
 GRANT ALL PRIVILEGES ON manila.* TO 'manila'@'localhost' IDENTIFIED BY 'qwe123qwe';
 GRANT ALL PRIVILEGES ON manila.* TO 'manila'@'%' IDENTIFIED BY 'qwe123qwe';
+```
 
 ## Criando usuário e serviço do Manila e adicionando ao projeto service
 
+```SH
 $ source admin-rc
 $ openstack user create --domain default --password qwe123qwe manila
 $ openstack role add --project service --user manila admin
 $ openstack service create --name manila --description "OpenStack Shared File Systems" share
 $ openstack service create --name manilav2 --description "OpenStack Shared File Systems V2" sharev2
+```
 
 ## Adicionando Endpoints do Manila 
- 
+
+```SH
 $ openstack endpoint create --region RegionOne share public http://controller:8786/v1/%\(tenant_id\)s
 $ openstack endpoint create --region RegionOne share internal http://controller:8786/v1/%\(tenant_id\)s
 $ openstack endpoint create --region RegionOne share admin http://controller:8786/v1/%\(tenant_id\)s
 $ openstack endpoint create --region RegionOne sharev2 public http://controller:8786/v2/%\(tenant_id\)s
 $ openstack endpoint create --region RegionOne sharev2 internal http://controller:8786/v2/%\(tenant_id\)s
 $ openstack endpoint create --region RegionOne sharev2 admin http://controller:8786/v2/%\(tenant_id\)s
- 
+```
+
 ## Instalando OpenStack Manila
+
 ```SH
 # yum install openstack-manila python-manilaclient
 ```
