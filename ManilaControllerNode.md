@@ -42,34 +42,31 @@ $ openstack endpoint create --region RegionOne sharev2 admin http://controller:8
 Edite o arquivo /etc/manila/manila.conf:
 
 ```SH
-    [DEFAULT]
-        transport_url = rabbit://openstack:RABBIT_PASS@controller
-  default_share_type = default_share_type
-        share_name_template = share-%s
-        rootwrap_config = /etc/manila/rootwrap.conf
-        api_paste_config = /etc/manila/api-paste.ini
-        auth_strategy = keystone
-    my_ip = 10.0.0.11
+[DEFAULT]
+transport_url = rabbit://openstack:qwe123qwe@controller
+default_share_type = default_share_type
+share_name_template = share-%s
+rootwrap_config = /etc/manila/rootwrap.conf
+api_paste_config = /etc/manila/api-paste.ini
+auth_strategy = keystone
+my_ip = 10.0.10.11
 
 [database]
-        ...
-        connection = mysql+pymysql://manila:qwe123qwe@controller/manila
+connection = mysql+pymysql://manila:qwe123qwe@controller/manila
 
 [keystone_authtoken]
-        ...
-        memcached_servers = controller:11211
-        www_authenticate_uri = http://controller:5000
-        auth_url = http://controller:5000
-        auth_type = password
-        project_domain_name = Default
-        user_domain_name = Default
-        project_name = service
-        username = manila
-        password = MANILA_PASS
+memcached_servers = controller:11211
+www_authenticate_uri = http://controller:5000
+auth_url = http://controller:5000
+auth_type = password
+project_domain_name = Default
+user_domain_name = Default
+project_name = service
+username = manila
+password = qwe123qwe
 
 [oslo_concurrency]
-        ...
-        lock_path = /var/lock/manila
+lock_path = /var/lock/manila
 ```
 
 ## Populando a base de dados do Manila:
