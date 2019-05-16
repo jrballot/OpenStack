@@ -1,10 +1,10 @@
 ## Instalando Manila na Storage Node¶
 ```
-# yum install openstack-manila-share python2-PyMySQL
+# yum install openstack-manila-share python2-PyMySQL -y
 ```
 ## Install LVM and NFS server packages:
 ```
-# yum install lvm2 nfs-utils nfs4-acl-tools portmap targetcli
+# yum install lvm2 nfs-utils nfs4-acl-tools portmap targetcli -y
 ```
 ## Iniciando serviço LVM
 ```
@@ -12,20 +12,20 @@
 # systemctl start lvm2-lvmetad.service target.service
 ```
 ## Criando LVM no /dev/sdc:
+
+Definindo /dev/sdc como disco gerenciâvel pelo LVM.
+```
+devices {
+...
+filter = [ "a/sda/", "a/sdb/", *"a/sdc"*, "r/.*/"]
+...
+}
+```
+
 ```SH
 # pvcreate /dev/sdc
 # vgcreate manila-volumes /dev/sdc
 ```
-
-
-        In the devices section, add a filter that accepts the /dev/sdb and /dev/sdc devices and rejects all other devices:
-
-        devices {
-
-
-        filter = [ "a/sda/", "a/sdb/", "a/sdc", "r/.*/"]
-
-
 
 Edit the /etc/manila/manila.conf file and complete the following actions:
 
