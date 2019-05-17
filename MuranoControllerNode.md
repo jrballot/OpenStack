@@ -1,25 +1,37 @@
+
+# Instalando OpenStack Muradno
+
+## Criando base de dados
+
+```
 # mysql -u root -p
 
 CREATE DATABASE murano;
 
 GRANT ALL PRIVILEGES ON murano.* TO 'murano'@'localhost' IDENTIFIED BY 'qwe123qwe';
 GRANT ALL PRIVILEGES ON murano.* TO 'murano'@'localhost' IDENTIFIED BY 'qwe123qwe';
+```
 
+## Criando usuário Murano
+```
 # . admin-openrc
 
 (admin)# openstack user create --domain default --password-prompt murano
 (admin)# openstack role add --project service --user murano admin
 (admin)# openstack service create --name murano --description "Application Catalog" application-catalog
+```
 
 ## Criando Endpoints do Murano
+```
 (admin)# openstack endpoint create --region RegionOne application-catalog public http://controller:8082
 (admin)# openstack endpoint create --region RegionOne application-catalog internal http://controller:8082
 (admin)# openstack endpoint create --region RegionOne application-catalog admin http://controller:8082
-
+```
      
 ## Instalando pacotes do Murano:
-
+```
 yum install openstack-murano-api openstack-murano-engine openstack-murano-dashboard -y
+```
 
 ## Configurando
 
