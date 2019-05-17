@@ -64,7 +64,16 @@ lock_path = /var/lib/manila/tmp
  lvm_share_export_ip = 10.0.10.41
 ```
 
+## Diretórios e permissões
 
+Garantir que os diretórios abaixo estejam criados e com permissão de usuário e group para o manila.
+
+```
+[root@storage ~]# ls -ld /var/lib/manila/*
+drwxr-xr-x. 2 manila manila    6 May 16 02:45 /var/lib/manila/groups
+drwxr-xr-x. 9 manila manila 4096 May 17 07:12 /var/lib/manila/mnt
+drwxr-xr-x. 2 manila manila 4096 May 17 07:14 /var/lib/manila/tmp
+```
       
 ## Finalizando e iniciando OpenStack Manila na Storage Node
 
