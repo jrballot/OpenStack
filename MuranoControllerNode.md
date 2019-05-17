@@ -9,7 +9,7 @@
 CREATE DATABASE murano;
 
 GRANT ALL PRIVILEGES ON murano.* TO 'murano'@'localhost' IDENTIFIED BY 'qwe123qwe';
-GRANT ALL PRIVILEGES ON murano.* TO 'murano'@'localhost' IDENTIFIED BY 'qwe123qwe';
+GRANT ALL PRIVILEGES ON murano.* TO 'murano'@'%' IDENTIFIED BY 'qwe123qwe';
 ```
 
 ## Criando usuário Murano
