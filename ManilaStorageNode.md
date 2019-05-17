@@ -69,6 +69,9 @@ lock_path = /var/lib/manila/tmp
 Garantir que os diretórios abaixo estejam criados e com permissão de usuário e group para o manila.
 
 ```
+[root@storage ~]# ls -ld /var/lib/manila/
+drwxr-xr-x. 5 manila manila 42 May 16 03:01 /var/lib/manila/
+
 [root@storage ~]# ls -ld /var/lib/manila/*
 drwxr-xr-x. 2 manila manila    6 May 16 02:45 /var/lib/manila/groups
 drwxr-xr-x. 9 manila manila 4096 May 17 07:12 /var/lib/manila/mnt
