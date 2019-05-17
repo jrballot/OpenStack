@@ -54,6 +54,9 @@ my_ip = 10.0.10.41
 enabled_share_backends = lvm
 enabled_share_protocols = NFS
 
+[database]
+connection = mysql+pymysql://manila:qwe123qwe@controller/manila
+
 [keystone_authtoken]
 memcached_servers = controller:11211
 www_authenticate_uri = http://controller:5000
