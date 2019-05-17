@@ -73,6 +73,22 @@ lock_path = /var/lock/manila
 ```SH
 # su -s /bin/sh -c "manila-manage db sync" manila
 ```
+
+## Diretórios e permissões
+
+Garantir os diretórios e permissões abaixo criados:
+
+```
+[root@controller ~](julio)# ls -ld /var/lib/manila
+drwxr-xr-x. 5 manila manila 86 May 16 03:29 /var/lib/manila
+
+[root@controller ~](julio)# ls -ld /var/lib/manila/*
+drwxr-xr-x. 2 manila manila 6 May 16 02:27 /var/lib/manila/groups
+-rw-r--r--. 1 manila manila 0 May 16 02:28 /var/lib/manila/manila-locked-clean-expired-messages
+drwxr-xr-x. 2 manila manila 6 May 16 03:29 /var/lib/manila/mnt
+drwxr-xr-x. 2 manila manila 6 Apr 17 00:41 /var/lib/manila/tmp
+
+```
      
 ## Iniciando Manila e garantindo inicialização no boot do sistema
 ```SH    
