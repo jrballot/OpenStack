@@ -1,5 +1,5 @@
 
-# Instalando OpenStack Muradno
+# Instalando OpenStack Murano
 
 ## Criando base de dados
 
