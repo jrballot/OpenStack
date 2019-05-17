@@ -80,5 +80,8 @@ As instruções que seguem devem ser realizadas em **TODAS** as maquinas antes d
 
 ## [Instalando OpenStack Swift no Controller Node](SwiftControllerNode.md)
 
-## [Instalando OpenStack Swift no Storage Node](SwiftObjectNode.md)
+## [Instalando OpenStack Swift no Object Node](SwiftObjectNode.md)
 
+## [Instalando OpenStack Manila no Controller Node](ManilaControllerNode.md)
+
+## [Instalando OpenStack Manila no Storage Node](ManilaStorageNode.md)
