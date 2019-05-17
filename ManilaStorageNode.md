@@ -1,3 +1,17 @@
+# OpenStack Manila 
+
+## Desativando Firewalld e SELinux
+
+```
+systemctl disable firewalld
+systemctl stop firewalld
+
+setenforce 0
+sed -i 's/SELINUX=enforcing/SELINUX=permissive/g' /etc/selinux/config
+```
+
+
+
 ## Instalando Manila na Storage Node¶
 ```
 # yum install openstack-manila-share python2-PyMySQL -y
