@@ -54,9 +54,9 @@ Altere o conteúdo do arquivo /etc/murano/murano.conf:
     auth_host = 'controller'
     auth_port = 5000
     auth_protocol = http
-    admin_tenant_name = %OPENSTACK_ADMIN_TENANT%
-    admin_user = %OPENSTACK_ADMIN_USER%
-    admin_password = %OPENSTACK_ADMIN_PASSWORD%
+    admin_tenant_name = admin
+    admin_user = admin
+    admin_password = qwe123qwe
 
     [murano]
     url = http://controller:8082
