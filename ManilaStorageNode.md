@@ -75,7 +75,7 @@ lock_path = /var/lib/manila/tmp
  share_driver = manila.share.drivers.lvm.LVMShareDriver
  driver_handles_share_servers = False
  lvm_share_volume_group = manila-volumes
- lvm_share_export_ip = 10.0.10.41
+ lvm_share_export_ip = 172.16.0.254
 ```
 
 ## Diretórios e permissões
